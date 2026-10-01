@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register Patient</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/patients">Patients</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/appointments">Appointments</a>
+            <a href="/billing">Billing</a>
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+            <h1>Register Patient</h1>
+
+            <p>
+                Enter the patient's information below.
+            </p>
+
+        </section>
+
+
+        <section class="form-container">
+
+            {% if error %}
+    <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            <form action="/add-patient" method="POST">
+
+                <div class="form-group">
+
+                    <label for="name">Patient Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter patient name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="age">Age</label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        placeholder="Enter age"
+                        min="0"
+                        max="120"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="gender">Gender</label>
+
+                    <select id="gender" name="gender" required>
+
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">Phone Number</label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter 10-digit phone number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required
+                    >
+
+
+                    <small>Enter a 10-digits phone number.</small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="address">Address</label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter patient's address"
+                        rows="4"
+                    ></textarea>
+
+                </div>
+
+
+                <button type="submit" class="action-button">
+                    Register Patient
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

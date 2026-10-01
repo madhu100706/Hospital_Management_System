@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medicare | Hospital Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✚</span>
+            Medicare
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/" class="active">
+                Dashboard
+            </a>
+
+            <a href="/patients">
+                Patients
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/billing">
+                Billing
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Content -->
+
+    <main class="container">
+
+
+        <!-- Welcome Section -->
+
+        <section class="welcome-section">
+
+            <div>
+                <span class="welcome-label">Hospital Management</span>
+
+                <h1>Hospital Dashboard</h1>
+
+                <p>
+                    Manage patients, doctors, appointments and billing
+                    from one place.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Statistics -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div class="stat-content">
+
+                    <h3>Total Patients</h3>
+
+                    <p>{{ total_patients }}</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🩺
+                </div>
+
+                <div class="stat-content">
+
+                    <h3>Total Doctors</h3>
+
+                    <p>{{ total_doctors }}</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📅
+                </div>
+
+                <div class="stat-content">
+
+                    <h3>Appointments</h3>
+
+                    <p>{{ total_appointments }}</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ₹
+                </div>
+
+                <div class="stat-content">
+
+                    <h3>Total Revenue</h3>
+
+                    <p>{{ total_revenue }}</p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Quick Actions -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">Shortcuts</span>
+                    <h2>Quick Actions</h2>
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+
+                <a href="/add-patient" class="action-button">
+
+                    <span class="action-icon">+</span>
+
+                    <span>
+                        <strong>Register Patient</strong>
+                        <small>Add a new patient</small>
+                    </span>
+
+                </a>
+
+
+                <a href="/add-doctor" class="action-button">
+
+                    <span class="action-icon">+</span>
+
+                    <span>
+                        <strong>Add Doctor</strong>
+                        <small>Register a doctor</small>
+                    </span>
+
+                </a>
+
+
+                <a href="/add-appointment" class="action-button">
+
+                    <span class="action-icon">+</span>
+
+                    <span>
+                        <strong>Book Appointment</strong>
+                        <small>Schedule an appointment</small>
+                    </span>
+
+                </a>
+
+
+                <a href="/add-bill" class="action-button">
+
+                    <span class="action-icon">₹</span>
+
+                    <span>
+                        <strong>Create Bill</strong>
+                        <small>Create a patient bill</small>
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Recent Appointments -->
+
+        <section class="section">
+
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">Overview</span>
+                    <h2>Recent Appointments</h2>
+                </div>
+
+                <a href="/appointments" class="view-all">
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Patient</th>
+
+                            <th>Doctor</th>
+
+                            <th>Date</th>
+
+                            <th>Time</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% if recent_appointments %}
+
+                            {% for appointment in recent_appointments %}
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        {{ appointment["patient_name"] }}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    {{ appointment["doctor_name"] }}
+                                </td>
+
+                                <td>
+                                    {{ appointment["appointment_date"] }}
+                                </td>
+
+                                <td>
+                                    {{ appointment["appointment_time"] }}
+                                </td>
+
+                                <td>
+
+                                    <span class="status-scheduled">
+                                        {{ appointment["status"] }}
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <tr>
+
+                                <td colspan="5" class="empty-state">
+
+                                    <div class="empty-icon">
+                                        📅
+                                    </div>
+
+                                    <strong>No appointments yet</strong>
+
+                                    <span>
+                                        Book an appointment to see it here.
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Medicare Hospital Management System
+        </p>
+
+        <p>
+            Simple • Secure • Efficient
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

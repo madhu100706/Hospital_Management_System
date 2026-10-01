@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Patients</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/patients">Patients</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/appointments">Appointments</a>
+            <a href="/billing">Billing</a>
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+            <h1>Registered Patients</h1>
+
+            <p>
+                View all patients registered in the hospital system.
+            </p>
+
+            <br>
+
+            <a href="/add-patient" class="action-button">
+                Register New Patient
+            </a>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="success-message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+            <form action = "/patients" method = "GET" class = "search-form">
+
+                <input
+                    type = "text"
+                    name = "search"
+                    placeholder = "Search by name or phone"
+                    value = "{{ search }}"
+                >
+
+            <button type = "submit" class = "action-button">
+                Search
+            </button>
+
+        </form>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for patient in patients %}
+
+                        <tr>
+
+                            <td>{{ patient["id"] }}</td>
+                            <td>{{ patient["name"] }}</td>
+                            <td>{{ patient["age"] }}</td>
+                            <td>{{ patient["gender"] }}</td>
+                            <td>{{ patient["phone"] }}</td>
+                            <td>{{ patient["address"] }}</td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="6">
+                                No patients registered yet.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

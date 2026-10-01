@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Doctors</title>
+
+    <link rel="stylesheet"href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/patients">Patients</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/appointments">Appointments</a>
+            <a href="/billing">Billing</a>
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+            <h1>Doctors</h1>
+
+            <p>
+                View all doctors registered in the hospital system.
+            </p>
+
+            <br>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="success-message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+            <a href="/add-doctor" class="action-button">
+                Add Doctor
+            </a>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Specialization</th>
+                            <th>Phone</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for doctor in doctors %}
+
+                        <tr>
+
+                            <td>{{ doctor["id"] }}</td>
+                            <td>{{ doctor["name"] }}</td>
+                            <td>{{ doctor["specialization"] }}</td>
+                            <td>{{ doctor["phone"] }}</td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="4">
+                                No doctors registered yet.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appointments</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+
+            <a href="/patients">
+                Patients
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/billing">
+                Billing
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+
+
+            <h1>Appointments</h1>
+
+            <p>
+                View all scheduled hospital appointments.
+            </p>
+
+            <br>
+
+
+            <a href="/add-appointment"
+                class="action-button">
+
+                Book Appointment
+
+            </a>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="success-message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Patient</th>
+
+                            <th>Doctor</th>
+
+                            <th>Specialization</th>
+
+                            <th>Date</th>
+
+                            <th>Time</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for appointment in appointments %}
+
+                        <tr>
+
+                            <td>
+                                {{ appointment["id"] }}
+                            </td>
+
+                            <td>
+                                {{ appointment["patient_name"] }}
+                            </td>
+
+                            <td>
+                                Dr. {{ appointment["doctor_name"] }}
+                            </td>
+
+                            <td>
+                                {{ appointment["specialization"] }}
+                            </td>
+
+                            <td>
+                                {{ appointment["appointment_date"] }}
+                            </td>
+
+                            <td>
+                                {{ appointment["appointment_time"] }}
+                            </td>
+
+                            <td>
+                                <span class="status-scheduled">
+                                    {{ appointment["status"] }}
+                                </span>
+                            </td>
+
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="7">
+                                No appointments scheduled yet.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Bill</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+
+            <a href="/patients">
+                Patients
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/billing">
+                Billing
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+            <h1>Create Bill</h1>
+
+            <p>
+                Create a bill for a registered patient.
+            </p>
+
+        </section>
+
+
+        <section class="form-container">
+
+                {% if error %}
+        <p class="error-message">{{ error }}</p>
+                {% endif %}
+
+
+            <form action="/add-bill" method="POST">
+
+
+                <div class="form-group">
+
+                    <label for="patient_id">
+                        Patient
+                    </label>
+
+                    <select
+                        id="patient_id"
+                        name="patient_id"
+                        required
+                    >
+
+                        <option value="">
+                            Select Patient
+                        </option>
+
+                        {% for patient in patients %}
+
+                        <option value="{{ patient['id'] }}">
+
+                            {{ patient['name'] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="amount">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        placeholder="Enter bill amount"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="payment_status">
+                        Payment Status
+                    </label>
+
+                    <select
+                        id="payment_status"
+                        name="payment_status"
+                        required
+                    >
+
+                        <option value="">
+                            Select Payment Status
+                        </option>
+
+                        <option value="Paid">
+                            Paid
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="action-button"
+                >
+                    Create Bill
+                </button>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

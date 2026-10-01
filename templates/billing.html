@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Billing</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+
+            <a href="/patients">
+                Patients
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/billing">
+                Billing
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+            <h1>Billing</h1>
+
+            <p>
+                View all hospital bills and payment status.
+            </p>
+
+            <br>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="success-message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+            <a href="/add-bill"
+            class="action-button">
+
+                Create Bill
+
+            </a>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Patient</th>
+                            <th>Amount</th>
+                            <th>Payment Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for bill in bills %}
+
+                        <tr>
+
+                            <td>
+                                {{ bill["id"] }}
+                            </td>
+
+                            <td>
+                                {{ bill["patient_name"] }}
+                            </td>
+
+                            <td>
+                                ₹{{ bill["amount"] }}
+                            </td>
+
+                            <td>
+                                {% if bill["payment_status"] == "Paid" %}
+                                    <span class="status-paid">
+                                        {{ bill["payment_status"] }}
+                                    </span>
+                                {% elif bill["payment_status"] == "Pending" %}
+                                    <span class="status-pending">
+                                        {{ bill["payment_status"] }}
+                                    </span>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="4">
+                                No bills created yet.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

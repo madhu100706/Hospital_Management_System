@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Doctor</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/patients">Patients</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/appointments">Appointments</a>
+            <a href="/billing">Billing</a>
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+            <h1>Add Doctor</h1>
+
+            <p>
+                Enter the doctor's information below.
+            </p>
+
+        </section>
+
+
+        <section class="form-container">
+
+            <form action="/add-doctor" method="POST">
+
+                <div class="form-group">
+
+                    <label for="name">Doctor Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter doctor name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="specialization">
+                        Specialization
+                    </label>
+
+                    <input
+                        type="text"
+                        id="specialization"
+                        name="specialization"
+                        placeholder="e.g. Cardiologist"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">Phone Number</label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter phone number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required
+                    >
+
+
+                    <small>Enter a 10-digit phone number.</small>
+
+                </div>
+
+
+                <button type="submit" class="action-button">
+                    Add Doctor
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

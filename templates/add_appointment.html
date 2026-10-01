@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/patients">Patients</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/appointments">Appointments</a>
+            <a href="/billing">Billing</a>
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="section">
+
+            <h1>Book Appointment</h1>
+
+            <p>
+                Select a patient and doctor and schedule an appointment.
+            </p>
+
+        </section>
+
+
+        <section class="form-container">
+
+            {% if error %}
+    <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            <form action="/add-appointment" method="POST">
+
+                <div class="form-group">
+
+                    <label for="patient_id">Patient</label>
+
+                    <select id="patient_id" name="patient_id" required>
+
+                        <option value="">
+                            Select Patient
+                        </option>
+
+                        {% for patient in patients %}
+
+                        <option value="{{ patient['id'] }}">
+                            {{ patient['name'] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="doctor_id">Doctor</label>
+
+                    <select id="doctor_id" name="doctor_id" required>
+
+                        <option value="">
+                            Select Doctor
+                        </option>
+
+                        {% for doctor in doctors %}
+
+                        <option value="{{ doctor['id'] }}">
+                            Dr. {{ doctor['name'] }}
+                            - {{ doctor['specialization'] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="appointment_date">
+                        Appointment Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="appointment_date"
+                        name="appointment_date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="appointment_time">
+                        Appointment Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="appointment_time"
+                        name="appointment_time"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="action-button">
+                    Book Appointment
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
