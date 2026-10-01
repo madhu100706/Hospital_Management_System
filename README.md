@@ -51,3 +51,79 @@ Hospital_Management_System/
     ├── appointments.html
     ├── add_bill.html
     └── billing.html
+```
+
+## Installation and Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/madhu100706/Hospital_Management_System.git
+```
+
+### 2. Open the project folder
+
+```bash
+cd Hospital_Management_System
+```
+
+### 3. Install Flask
+
+```bash
+py -m pip install flask
+```
+
+### 4. Run the application
+
+```bash
+py app.py
+```
+
+The application will run locally at:
+
+```text
+http://127.0.0.1:5000
+```
+
+## Database
+
+The project uses SQLite for storing:
+
+- Patient information
+- Doctor information
+- Appointment information
+- Billing information
+
+The database tables are automatically created when the application starts.
+
+## Screenshots
+
+### Dashboard
+
+![Dashboard](Snapshots/Dashboard1.png)
+
+### Patient Management
+
+![Patient Management](Snapshots/Patient.png)
+
+### Doctor Management
+
+![Doctor Management](Snapshots/Doctor.png)
+
+### Appointments
+
+![Appointments](Snapshots/Appointments.png)
+
+### Billing
+
+![Billing](Snapshots/Billing.png)
+
+## Project Purpose
+
+This project was developed as part of a Python programming internship to practice web application development using Flask, database integration, HTML, CSS, form handling, and Git/GitHub.
+
+## Author
+
+**Madhu**
+
+GitHub: [madhu100706](https://github.com/madhu100706/Hospital_Management_System)
